@@ -1,0 +1,14 @@
+#! /bin/sh
+
+echo "##functions.mk:" > temp && \
+grep '^# $(call ' functions.mk >> temp && \
+grep '^# $([A-Z_0-9][A-Z_0-9]*)' functions.mk >> temp
+
+echo "" >> temp
+
+echo "##libraries.mk:" >> temp && \
+grep '^# $(call ' libraries.mk >> temp && \
+grep '^# $([A-Z_0-9][A-Z_0-9]*)' libraries.mk
+
+sed -i 's/# /#    /' temp
+cat temp && rm -f temp

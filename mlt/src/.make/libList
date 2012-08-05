@@ -1,0 +1,36 @@
+# @auth Travis Fischer
+# @acct tfischer
+# @date March 2008
+# @site http://www.cs.brown.edu/people/tfischer/make
+# @version 1.0
+#
+# Each library which the makefile subsystem supports automatic detection of is 
+# listed on its own line in the following format:
+#
+# Canonical-name,Type,Release,Debug,F.Release,F.Debug, (continued...)
+# Header-list,Symbol-list,Depends-on,Special-Action
+# 
+# If Special-Action is defined, the define $(Canonical-name_ACTION) will be evaled.
+# 
+# NOTE: This file is based on icompile source code written by Morgan McGuire
+# See http://ice.sf.net for more info
+SDL,$(MAYBEFRAMEWORK),SDL,SDL,SDL,SDL,SDL.h,SDL_GetMouseState,OpenGL Cocoa pthread,true,
+curses,DYNAMIC,curses,curses,none,none,curses.h,,,
+zlib,DYNAMIC,z,z,none,none,zlib.h,compress2,,
+zip,STATIC,zip,zip,none,none,zip.h,unzClose,zlib,
+glut,$(MAYBEFRAMEWORK),glut,glut,none,none,glut.h,,,
+OpenGL,$(MAYBEFRAMEWORK),GL,GL,OpenGL,OpenGL,gl.h,glBegin glVertex3,,
+jpeg,DYNAMIC,jpeg,jpeg,none,none,jpeg.h,jpeg_memory_src jpeg_CreateCompress,,
+png,DYNAMIC,png,png,none,none,png.h,png_create_info_struct,,
+GLU,$(MAYBEFRAMEWORK),GLU,GLU,none,none,glu.h,gluBuild2DMipmaps,OpenGL,
+Cocoa,FRAMEWORK,none,none,Cocoa,Cocoa,Cocoa.h,DebugStr,,
+Carbon,FRAMEWORK,none,none,Carbon,Carbon,Carbon.h,ShowWindow,,
+AppleGL,FRAMEWORK,none,none,AGL,AGL,agl.h,_aglChoosePixelFormat,,
+G3D,STATIC,G3D,G3Dd,none,none,G3D.h,,zlib jpeg png zip Cocoa pthread Carbon $(MAYBEG3DX11),
+GLG3D,STATIC,GLG3D,GLG3Dd,none,none,GLG3D.h RenderDevice.h,,G3D SDL OpenGL GLU AppleGL,
+pthread,DYNAMIC,pthread,pthread,none,none,pthread.h,,,
+QT,DYNAMIC,qt-mt,qt-mt,none,none,QT_HEADERS,,,
+IOKit,FRAMEWORK,none,none,IOKit,IOKit,IOHIDKeys.h IOKitLib.h IOHIDLib.h,IOMasterPort,,
+X11,DYNAMIC,X11,X11,none,none,x11.h,XSync XFlush,,
+ANN,STATIC,ANN,ANN,none,none,ANN.h,,,
+FMOD,DYNAMIC,fmodex,fmodex,none,none,fmod.hpp fmod.h,,,

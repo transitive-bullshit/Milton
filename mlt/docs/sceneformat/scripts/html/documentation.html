@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>.make Build System - Documentation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <meta name="keywords" content="make, build, linux, unix, GNU, GNU Make, C, C++" />
+      <meta name="description" content="C/C++ build system built atop standard GNU Make" />
+      <meta name="author" content="Travis Fischer" />
+      <meta name="copyright" content="Travis Fischer 2008" />
+      
+      <meta name="robots" content="index,follow"/>
+      <meta name="revisit-after" content="14 days"/>
+      <link rel="stylesheet" type="text/css" href="styles/mainScreen.css" media="all" />
+      <script type="text/javascript" src="scripts/jquery.js"></script> 
+      <script type="text/javascript" src="scripts/documentation.js"></script> 
+
+      <!--[if lte IE 6]>
+      <link rel="stylesheet" type="text/css" href="styles/ie6.css" />
+      <![if IE 5]> <link rel="stylesheet" type="text/css" 
+href="styles/ie5.css" /> <![endif]>
+      <![endif]-->
+   </head>
+   
+   <body id="DOCUMENTATION">
+      <a name="topAnchor"></a>
+      <div id="wrapper">
+         <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="examples.html">Examples</a></li>
+            <li><a href="download.html">Download</a></li>
+            <li class='selected'>Documentation</li>
+            <li><a href="project.html">Project</a></li>
+         </ul>
+         
+         <div id="contentWrapper">
+            <div id="content">
+               <div class="section">
+                  <h1>Documentation</h1>
+                  <p class="indent">
+                  Included in the download for the .make build system is an example Makefile 
+                  and a '.make' folder. We'll refer to this example Makefile as a .make Makefile.
+                  Think of it as the public interface to the .make library, whose functionity is 
+                  located in the '.make' folder (a collection of GNU Makefiles).
+                  </p>
+                  <p class="indent">
+                     To use the .make build system, copy the '.make' folder 
+                     (and all of its contents) into your project, along with the example .make 
+                     Makefile. The .make Makefile does not need to be located in the same 
+                     directory as the '.make' folder (see PROJECT_BASE_DIR for more info), but 
+                     in most simple projects, it will be. See the <a href="examples.html">examples</a> 
+                     section for an example project setup.
+                  </p>
+               </div>
+               
+               <div class="section">
+                  <h1>Makefile Configuration Options</h1>
+                  <p class="indent">
+                     A .make Makefile acts as the public interface to the internal '.make' library.
+                  It contains a series of public, project-specific configuration options which you 
+                  may need to edit, depending on your project's needs. Note that most simple projects 
+                  will have no need to edit these options since the defaults are meant to be as 
+                  all encompassing and generic as possible.
+                  </p>
+                  <p class="indent">
+                  Within a .make Makefile, all public variables are prefixed by '<span class="keyword">PROJECT_</span>' and, 
+                  by default, they are all commented out with lines beginning with '<span class="keyword">##</span>' 
+                  (in GNU Makefiles, a '<span class="keyword">#</span>' pound sign denotes the start of a comment). In addition 
+                  to inline documentation in the .make Makefile itself, below is a comprehensive 
+                  listing of each public variable, including descriptions and example usage.
+                  </p>
+               </div>
+               
+               <div id="variables">
+                  <!-- Filled in by javascript -->
+               </div>
+            </div>
+            
+            <div id="footer">
+               <p>Copyright &copy; 2008 <a href="mailto:fisch0920@gmail.com">Travis Fischer</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
+

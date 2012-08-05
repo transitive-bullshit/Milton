@@ -1,0 +1,4 @@
+   * Add PoissonSampler, GeometricSampler, 
+   * Add UniformOnShapeSampler? Already have UVSampler
+   * Test [min,max) or [min,max] for DiscreteUniform and ContUniform
+

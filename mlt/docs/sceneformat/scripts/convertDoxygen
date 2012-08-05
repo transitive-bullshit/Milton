@@ -1,0 +1,12 @@
+#!/bin/bash
+
+files="../generated/html/*.php"
+echo ""
+echo "Converting Doxygen C++ style to Scenefile style"
+
+sed -i -e 's/Class \([Hh]ierarchy\)/Element \1/g' -e 's/Class \([Rr]eference\)/Element \1/g' -e 's/Class\(&nbsp;[Hh]ierarchy\)/Element\1/g' -e 's/Class\(&nbsp;[Mm]ember\)/Element\1/g' -e 's/Class\(&nbsp;[Ll]ist\)/Element\1/g' -e 's/struct /element /g' -e 's/Struct /Element /g' $files
+
+sed -i -e 's/Classes/Elements/g' -e 's/Class \([Ii]ndex\)/Element \1/g' -e 's/Public \([Aa]ttributes\)/\1/g' -e 's/Member Data/Attribute/g' -e 's/Variable/Attribute/g' $files
+sed -i -e 's/Class \([Ll]ist\)/Element \1/g' -e 's/class \([Ll]ist\)/Element \1/g' $files
+sed -i -e 's/classes, structs, unions and interfaces/scenefile elements/g' $files
+

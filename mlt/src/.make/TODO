@@ -1,0 +1,41 @@
+# @auth Travis Fischer
+# @acct tfischer
+# @date March 2008
+# @site http://www.cs.brown.edu/people/tfischer/make
+# @version 1.0
+#    This file contains miscellaneous implementation notes and thoughts for 
+# future additions/improvements to the Makefile subsystem.
+
+Add (automatic?) dependencies btwn (relative?) directories in include path
+   recursive MAKE to check whether or not to rebuild that target
+   NOTE: Must link each and every time to ensure DBG/OPT mode changes are 
+   updated
+
+Automatic detection of all C,cpp,cc,c etc and H,h
+
+----------------------------
+
+
+Define MAX/MIN function on arithmetic? is it even worth it?
+
+Investigate linux source build system for inspiration
+
+Add Unittests for all new boolean logic variables
+
+Test PROFILE= on commandline
+
+
+OLD:
+   * Add multidirectory support
+        By default, icompile-like, directory descending 
+        automatic incorporation of directories
+   * Investigate MAPping $(MAKE) -C dir over all directories :)
+   * Ensure BFS does not produce duplicate entries
+   * For SPEED/EFFICIENCY, have a generic way to $(or $(eval etwas := $1),$(etwas)) 
+        when $(etwas) will be used multiple times
+   * Add ALL MODE which compiles DBG and OPT targets
+   * Add support for creating archives/shared objects
+   * Must have MODE-specific dependency files
+   * Check out -MMD and -MT/-MQ flags for gcc
+        Only compile once! --> generate dependency information during normal compilation
+

@@ -1,0 +1,1 @@
+find . \( -name "*.js" -or -name "*.h" -or -name "*.sh" -or -name "*.html" \) | grep -v "scripts\/scenefile.h\|scripts\/format.js\|generated*" | xargs wc -l | sort

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+rm -f *.js && cp -f ../../usage/*.js .
+
+sed -i 's/\"/\\"/g' *.js
+
+for U in `ls *.js` ; do 
+   N=`echo "$U" | sed 's/\.js//g'`;
+   vim '+%s/   \([^ ].*\)$/\&lt;div class='indent'\&gt;\1\&lt;\/div\&gt;/g' '+%s/   \([^ ].*\)$/\&lt;div class='indent'\&gt;\1\&lt;\/div\&gt;/g' '+%s/   \([^ ].*\)$/\&lt;div class='indent'\&gt;\1\&lt;\/div\&gt;/g' '+%s/   \([^ ].*\)$/\&lt;div class='indent'\&gt;\1\&lt;\/div\&gt;/g' '+%s/   \([^ ].*\)$/\&lt;div class='indent'\&gt;\1\&lt;\/div\&gt;/g' '+%s/^ *$/\&lt;br\&gt;/g' '+%s/\n/<br> /g' '+%s/^.*$/"&",/g' '+wq' $U;
+done
+

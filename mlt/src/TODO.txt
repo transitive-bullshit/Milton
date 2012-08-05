@@ -1,0 +1,334 @@
+Proj: Milton
+File: TODO.txt
+Date: 12/7/2008
+Note: All items listed on a scale of 1-10, where 1 is lowest priority and 10 is 
+      highest priority
+
+
+8) fix 1/r^2 speckles near corners with bidirectional path tracer
+
+8) Test AggregateBSDF
+   * test mapping subbsdf CDF
+
+6)  test environment mapping
+   * add alternative 'coords' options
+   * current 'coords' (lat/long) not even correct for grace_probe.hdr
+
+10) Cube normals are possibly incorrect
+
+3) fix and test MultipleImportanceSampler
+
+1) finish implementation of SSE-enabled linear algebra package
+   * currently consists of only Vector3; add Point3 and Matrix4x4 specializations
+
+6) add 'update' flag and rect to SamplePoint
+
+4) add last-occluder cache per light to DirectIllumination
+
+3) BSDFs allowed to be sampled w/ respect to incident radiance spectrum
+   * especially important for wavelength-dependent dieletric filters
+
+4) convert ArgParser for use with modifying arbitrary parameters via commandline
+   * Partially done; todo: allow -output={arbitrary json}, -camera={arbitrary json}, and -renderer={arbitrary json} to override those found in the scenefile
+
+8) need a way of specifying units
+   * what does position (0, 1, 0) mean in our "world"?
+   * what are units of distance ||x - x'||^2 in direct illumination?
+
+3) TinyJSON fixes
+   * multiple objects not getting overwritten when adding to std::map
+   * timestamps for all parsed object s.t. we can order transforms and shapes..
+   * add ability to specify 'inf' or 'infinity' or '-inf' or '-infinity' as a number
+   * add // style comments
+
+2) get optimized ray-triangle intersection routine working
+
+4) update physicallyValid BSDF test for changes to BSDFs
+
+4) decouple Camera from sensor Material; allow any Shape w/ UV mappings to be 
+   sensitive to incident radiance (aka emit importance)!!
+
+3) implement irradiance caching / gradients / filtering for direct illumination component
+
+
+-------------------------------------------------------------------------------
+
+
+7) TEST SCENES
+   * already aggregated several hundred .OBJ files
+   * TopMod provides a really cool opportunity for interesting objects
+
+4) Cool enforceReality boolean flag to disallow non-physically-real behavior
+
+3) CSG -- related to Metaballs; can have 'positive' and 'negative forces :)
+
+4) Add references section
+   * record papers and resources used as we go..
+
+
+-------------------------------------------------------------------------------
+
+
+Misc:
+3) Separate out BSDF, BRDF, BTDF? BSSRDF?
+
+   * RenderOutput:
+      * fine-grained locking w/ respect to adding samples instead of one overarching lock
+
+   * ShapeSet -> Transformable:
+      * Try to abstract out common functionality btwn ShapeSet and Mesh?
+
+   * Mesh -> Transformable:
+      * Triangle and MeshTriangle (2 types), one is a shape, one is not
+      * MeshTriangle doesn't contain AABB and no virtual methods
+      * Mesh should then not subclass ShapeSet
+         * Will have to specialize OpenGL drawing and init for Mesh
+      * 3 types of Triangle overall
+         * Triangle - fast intersection
+         * MeshTriangleFast
+         * MeshTriangleSlow
+      * TODO: MeshTriangle should derive from IIntersectable oder etwas and so should Shape
+   
+   * getIntersection and intersects
+      * possibly aggregate cumulative transformation of original Ray -> new ray and only 
+      * perform one final _transformRayWorldToObj(ray, P, D, invCTM);
+   
+   * Transformable's inverse matrix
+      * only need transposed adjoint (adjoint doesn't divide inverse through by determinant)
+      * NOTE: this logic becomes invalid once InstancedShapes start using the actual 
+        inverse transform to counteract the instancee's transform
+   
+   --------------------------------
+   * Scene:
+      * ensure lights get added when initting sub-ShapeSets and their 
+        children which contain emitter-materials
+      * likewise, when deleting sub-Shapesets, need a flag denoting whether 
+        or not that ShapeSet owns its memory; not all ShapeSets should own 
+        their own memory...
+   --------------------------------
+
+   * PointSampleRenderer:
+
+   * Noise-reduction in output renders:
+      * http://www.neatimage.com/
+
+filters:
+   * Fix separable filter implementations to be templated on the dimension with base cases for 1D, 
+     similar to PBRT / LuxRender
+
+
+-------------------------------------------------------------------------------
+OLD:
+-------------------------------------------------------------------------------
+
+
+3) add option to grammar for noRenderThreads as "heuristic" that will choose 
+   # of threads based on # of cpus
+
+8) fix dispersion
+   * set wavelength along with a ray instead of at each intersection for ior 
+     so it's all coherent; otherwise, refraction & multiple bounces within material 
+     will mostly not get through if IOR is wavelength-dependent
+
+8) add tone mapping
+   * Reinhard et al's photographic approach
+
+10) Metropolis Light Transport
+
+10) add units to all major function explanations
+
+8) make BSDF::sample more prominent in docs
+
+10) Switch hacky Spectrum class with a better SpectralSampleSet class
+   * Test wavelength-dependent rendering via dispersion through a prism!!
+
+5) add the ability to save meshes out in OBJ format
+
+10) sane, auto-generated scenefile documentation
+   * neat format for all built-in variant types w/ images and thorough 
+     explanations of all @params, including:
+      * UNITS
+      * optional / default value
+      * type (boolean, string, etc.)
+      * restrictions (eg. in [0,1])
+      * example usage
+
+10) go through and clarify lots of small things in comments
+
+10000) fix efficient direct illumination in path tracing of specular scenes, 
+       in which a nasty bug creeps up and the image seems to converge to white
+
+9) more realistic camera model
+   * finish thin lens implementation and test w/ DOF and "real" camera parameters
+   * look into "fixing" cornell box scenes as they apparently use mm instead of m...
+
+9) Better internal image format seamlessly supporting standard 32-bit Rgba and floating-point HDR data
+   * HDR and OpenEXR image loading / saving support
+
+7) add Vector3::cosRandom() similar to G3D
+
+10) test other materials besides diffuse
+   * get AggregateBSDF working
+   * test mapping other stuff besides kd
+   * add Snell's Law to SpecularBSDF
+
+5) rotate, translate, scale all in the same block
+
+6) add texture UV repeats / mirror, etc.
+
+10) Mesh dielectric BSDF doesn't work; triangle normals?
+
+4) look into spcialized Vector3 / Point3 / Matrix4x4 w/ SIMD, using built-in 
+   compiler intrinsics
+
+10) photon mapping
+   * start from scratch (no 224 code) except for Jensen's kdTree
+
+7) investigate not having to allocate BSDF, emitter, and sensor for every point?
+
+3) Dynamic shared library support for loading custom, external plugins
+   * plug into "dynamic" variant type for renderer, shape, camera, etc.
+
+3) have ResourceManager manage common per-thread instances like Samplers
+   * currently lots of extra resource allocation on-the-spot cause of possible 
+     contention issues
+
+8) abstract out construction of a milton application w/ Qt frontend via a MiltonApp
+   * make it easier to include milton lib files by having all internal header #includes
+     be relative to one directory s.t. the user only has to add one -I to their 
+     include path
+   * include top-level, convenience 'milton.h' header which includes all public milton 
+     headers
+
+10) Bidirectional Path Tracing
+
+10) test SAH kd-Tree and get it working asap -- will speed up development!
+   * add check during split s.t. if split doesn't reduce # children, no split occurs
+   * currently, ShapeSet defaults to 'naive'; fix octree at least to not 
+     degenerate into a huge tree and switch default to 'kdTree'
+
+4) add timer to renderer to determine elapsed render time
+   * boost::timer looks nice and simple
+
+9) Rotation doesn't work on instanced shapes
+
+5) support sampling from meshes s.t. we can have mesh emitters
+   * sampling from meshes -> using them as odd shaped area lights :-)
+   * tested with meshEmitter.js
+
+7) named nodes in scenegraph + instancing
+   * especially important for materials
+
+13) fix multithreading error w/ access to DirectIllumination's Domain
+    inserting noSamples across threads!!!
+
+* Get rid of ShapePtr
+   * Scene strictly owns all shapes
+   
+8) path tracing
+   * modification of current Whitted-style raytracer
+   * how to easily modify # primary samples using same PointSampleRenderer interface?
+   * possibly modify Domain to always range from 0 to 1?
+
+7) add bump / normal mapping
+   * start from my implementation from 224
+
+9)  fix loader which currently disregards adding subshapes to ShapeSet if 
+   defined in the scenefile!! need a notion of a 'current material' but 
+   for primitivelist; like a stack..
+
+5) abstract out DirectIllumination computation
+
+10) Test materials and get basic color / textures working
+
+10) Get materials / emitters working
+   * need example scenes that work in OpenGL with variety of lights / materials
+   * need a way of ensuring successive Emitters have different glLightIndices.. done!
+
+9) static global resources w/ PropertyMap
+   * synchronized access for use w/ renderthreads
+   * Gui / Visualizations -> set options -> propagate to shapes
+      * ie, turn on / off debugging visualizations such as spatial acceleration preview and AABBs
+   * Globally-accessible resources
+      * Images, log, etc. ala C#'s global.static.resources
+   * in global properties, have option for whether or not to enable default OpenGL lighting
+      * in OpenGLCanvas, take this into account when resetting light state
+
+10) engineer SampleGenerator interface s.t. it can be used with other 2D domains!!
+   * ex. stochastic sampling of area light source for direct illumination
+
+9) Optimize ray-triangle intersection routines
+   * implement/test Ward's ray-triangle intersection routine (Nong had this originally)
+   * two separate Mesh structures w/ threshold on mesh size
+      * one with precomputed data for smaller meshes -- faster intersection tests
+      * one without precomputed data for larger meshes -- slightly slower intersection tests but less memory overhead
+      * http://little3d.free.fr/ressources/jgt%20intersect_triangle().htm
+      * http://www.cs.lth.se/home/Tomas_Akenine_Moller/raytri/raytri.c
+
+9) add PLY mesh support and possibly abstract out current obj mesh loading to use an external / more robust / faster obj loader
+   * already have third-party, open-source ply and obj mesh loaders
+   * http://www.cs.kuleuven.ac.be/~ares/libply/
+
+7)  Metaballs cause they're fuckin baller...
+   * great links:
+      * http://www.paulsprojects.net/metaballs2/metaballs2.html
+      * http://www.geisswerks.com/ryan/BLOBS/blobs.html
+   * okay links:
+      * http://delivery.acm.org/10.1145/360000/357310/p235-blinn.pdf?key1=357310&key2=6370978221&coll=GUIDE&dl=GUIDE&CFID=13853892&CFTOKEN=33552722
+      * http://wiki.blender.org/index.php/Manual/PartII/Meta_Objects#Technical_Details
+      * http://www.siggraph.org/education/materials/HyperGraph/modeling/metaballs/metaballs.htm
+      * http://www.gamedev.net/reference/programming/features/isometa2d/default.asp
+      * http://www.niksula.cs.hut.fi/~hkankaan/Homepages/metaballs.html
+   * marching cubes:
+      * http://www.exaflop.org/docs/marchcubes/#The%20Test%20Data
+      * http://www.ia.hiof.no/~borres/cgraph/explain/marching/p-march.html
+      * http://www.polytech.unice.fr/~lingrand/MarchingCubes/algo.html
+      * http://www.whisqu.com/per/docs/math29.htm
+      * http://local.wasp.uwa.edu.au/~pbourke/geometry/polygonise/
+      * http://www.cfxweb.net/modules.php?name=News&file=article&sid=199
+      * http://www.marchingcubes.org/index.php/Image:MCCases.png
+      *** and several papers I downloaded into papers/marchingCubes
+
+9) abstract out generic logging interface
+   * warning, error, and info streams w/ appropriate defaults depending on #ifdef DEBUG
+   * ParseData should derive from log
+
+9) add point lights and hasNormal check
+   * also have to getSurfaceArea(); if it's zero, then only 1 sample is needed
+8) fix rendering issue w/ multiple threads and last pixels not getting updated w/ Qt properly 
+     until rendering has finished
+
+   *** Check out: http://graphics.uni-ulm.de/BIH.pdf
+     *** supposed to be better than kd-Trees with SAH!!!
+     *** result: that paper seems to be bullshit imho...
+
+shape:
+   * ensure Transformable modifying ModelView matrix doesn't mess up 
+        drawing of future shapes in GL (push/pop matrices)
+
+* Prevent m_shapes and m_lights from both initializing their subshapes
+*** multiple levels of SpatialAccel -- getIntersection(ray, pt), pt.normalCase and pt.etc will 
+   keep getting overwritten in lower levels and on the way up the stack frames!!
+
+
+References:
+   * An efficient and robust ray-box intersection algorithm. 
+     http://cag.csail.mit.edu/~amy/papers/box-jgt.pdf
+   
+   * Dutre, Philip, et al. Advanced Global Illumination. Second Edition, 2006
+   
+   * Jensen, Henrik, Wann. Realistic Image Synthesis Using Photon Mapping. 2001
+   
+   * Using the Modified Phong Reflectance Model for Physically Based Rendering
+     (Lafortune & Willems, 1994)
+     http://www.cs.ucl.ac.uk/teaching/4074/Jesper/lafortune__modified_phong__1994.pdf
+
+   * Intel SSE Intrinsics Reference
+      http://cc.in2p3.fr/doc/INTEL/icc/doc/main_cls/mergedProjects/intref_cls/whnjs.htm
+
+   * SSE Intrinsics Wiki
+      http://wiki.nccaforum.com/index.php?title=SSE_Intrinsics
+   
+   * MSDN SSE2 Instructions
+      http://msdn.microsoft.com/en-us/library/kcwz153a(VS.80).aspx
+

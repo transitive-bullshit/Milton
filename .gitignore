@@ -1,0 +1,10 @@
+.DS_Store
+*.swp
+*~
+*.pyc
+*.pyo
+*.svn/*
+*.o
+*.so
+*.a
+

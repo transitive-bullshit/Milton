@@ -1,0 +1,1 @@
+find . \( -name "*.cpp" -or -name "*.h" -or -name "*.inl" -or -name "*.mk" -or -name Makefile \) | grep -v "am261\|svn\|.bin\|objparser\|plyparser\|fibermesh\|tinyjson\|misc\|bunnies\|third-party" | xargs wc -l | sort

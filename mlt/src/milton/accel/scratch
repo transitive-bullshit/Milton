@@ -1,0 +1,33 @@
+#ifdef SAH_RADIX_SORT
+#  define SAH_GET_PLANE(i)     (planes[i])
+#  define SAH_GET_PRIM(i)      (indices[i])
+   
+   char *buf = (char*) alloca(noPrimitives * 
+                             (sizeof(double) + 2 * sizeof(unsigned int)));
+   ASSERT(buf);
+   
+   unsigned long offset  = noPrimitives * sizeof(unsigned int);
+   unsigned int *indices = (unsigned int*)(buf);
+   unsigned int *scratch = (unsigned int*)(buf + offset);
+   double       *planes  = (double*)      (buf + offset * 2);
+   
+   for(unsigned int i = noPrimitives; i--;)
+      planes[i] = primitives[i]->getMin(splitAxis);
+   
+   radixSortIndices(planes, indices, scratch, noPrimitives);
+#else // std::sort
+#  define SAH_GET_PLANE(i)     (planes[i].first)
+#  define SAH_GET_PRIM(i)      (planes[i].second)
+   
+   std::pair<double, unsigned> *planes = 
+      (double*) alloca(noPrimitives * sizeof(std::pair<double, unsigned>));
+   
+   for(unsigned int i = noPrimitives; i--;) {
+      planes[i].first  = primitives[i]->getMin(splitAxis);
+      planes[i].second = i;
+   }
+   
+   std::sort(planes);
+#endif
+   
+

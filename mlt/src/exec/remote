@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ "$1" != "" ]; then
+   file="$1"
+else 
+   file=scenes/default.js
+fi
+
+if [ "$2" != "" ]; then
+   out="$2"
+else 
+   f2=`echo "$file" | sed 's/\//./g'`
+   out=".$f2.png"
+fi
+
+echo "Remotely rendering file '$file'"
+echo "Saving temporary renders to '$out'"
+echo ""
+
+./milton -nox $file -output=$out; mutt -s "Milton Render $1" -a $out -a $file fisch0920@gmail.com < /dev/null
+

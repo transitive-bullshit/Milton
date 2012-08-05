@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# preprocess usage snippets to a format suitable for html / c++
+cd usage && ./gen && cd -
+
+# preprocess format.js, replacing #includes and _usage elements with their actual text
+cp -f ../format.js .temp.js && sed -i 's/\/\*\(#include.*\)\*\//\1/g' .temp.js && cpp -P -C .temp.js -o .temp2.js && vim '+%s/\"\(usage\/[a-zA-Z0-9]*\)\.js\"[, ]*/\r#include "\1.js"/g' '+wq' .temp2.js && sed -i 's/\/\*\(#include.*\)\*\//\1/g' .temp2.js && cpp -P -C .temp2.js -o format.js && rm -f .temp.js .temp2.js && cp -f ../scenefile.h ./
+
+# invoke test.js script
+firefox html/test.html
+
+# ask user to copy results of invoking test.js (html page) into scenefile.h and save/exit; then generate the doxygen documentation from scenefile.h
+kate scenefile.h && ./updateDocs
+rm -f scenefile.h~
+

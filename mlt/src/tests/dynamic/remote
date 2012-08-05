@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ "$1" != "" ]; then
+   file="$1"
+else 
+   file=default.js
+fi
+
+./dynamic -nox $file -output=out.png; pine fisch0920@gmail.com -attach out.png -attach $file
+

@@ -1,0 +1,98 @@
+/**
+ * @file statsKdTree.txt
+ * @author Travis Fischer (fisch0920@gmail.com)
+ * @date   Fall 2008
+ * 
+ * @brief
+ *    Results from various tests while tuning and experimenting kd-Tree
+ * implementation in Milton; I'm keeping these around for comparison purposes 
+ * in case of future performance tuning.
+ */
+
+
+// bunny and bunny scene respectively; octree max depth 24
+initializing kdTree: 69451 primitives // bunny master
+   minDepth:      3
+   maxDepth:      24
+   avgDepth:      18
+   noInternal:    6040
+   noLeaves:      6041
+   minPrimitives: 1
+   maxPrimitives: 3871
+   avgPrimitives: 19.9839
+initializing kdTree: 25 primitives   // bunny instances
+   minDepth:      1
+   maxDepth:      3
+   avgDepth:      2
+   noInternal:    3
+   noLeaves:      4
+   minPrimitives: 1
+   maxPrimitives: 20
+   avgPrimitives: 8
+
+// bunny and bunny scene respectively; SAH max depth 24
+initializing kdTree: 69451 primitives
+   minDepth:      5
+   maxDepth:      24
+   avgDepth:      21
+   noInternal:    261930
+   noLeaves:      261931 // 16,777,216 max
+   minPrimitives: 0
+   maxPrimitives: 15
+   avgPrimitives: 3.69343
+initializing kdTree: 25 primitives
+   minDepth:      1
+   maxDepth:      10
+   avgDepth:      7
+   noInternal:    31
+   noLeaves:      32
+   minPrimitives: 0
+   maxPrimitives: 6
+   avgPrimitives: 2.84375
+
+
+// lion octree
+initializing kdTree: 8796 primitives
+   minDepth:      4
+   maxDepth:      12
+   avgDepth:      10
+   noInternal:    277
+   noLeaves:      278
+   minPrimitives: 3
+   maxPrimitives: 591
+   avgPrimitives: 48.8022
+
+// lion SAH; no max depth; no two split axes in a row
+initializing kdTree: 8796 primitives
+   minDepth:      4
+   maxDepth:      24
+   avgDepth:      18
+   noInternal:    28670
+   noLeaves:      28671
+   minPrimitives: 0
+   maxPrimitives: 29
+   avgPrimitives: 4.21101
+
+// lion SAH; no max depth; two split axes in a row are acceptable
+initializing kdTree: 8796 primitives
+   minDepth:      5
+   maxDepth:      24
+   avgDepth:      19
+   noInternal:    32241
+   noLeaves:      32242
+   minPrimitives: 0
+   maxPrimitives: 29
+   avgPrimitives: 4.12115
+
+
+
+// Miscellaneous timings (480x480 images)
+
+cornellBox; rayTracer; noRenderThreads=8; noSuperSamples=16; noDirectSamples=1;
+   debug mode:     92.3801s
+   optimized mode: 72.71s
+
+bunny test scene; pathTracer; noRenderThreads=8; noDirectSamples=1; 1% of 512
+   octree:         119.913s
+   SAH:            54.271s
+

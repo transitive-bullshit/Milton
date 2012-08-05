@@ -1,0 +1,6 @@
+"dynamic" : {
+   "_brief" : "External plugin loaded dynamically at run-time.", 
+   "_desc"  : "External Milton plugins must conform to the following interface, comprised of three functions: plugin_type, plugin_new, and plugin_delete.  When a 'dynamic' type is found in a scenefile for a renderer, camera, output, etc.. (see MILTON_PLUGIN_TYPE for a complete list of available dynamic plugin types), Milton will attempt to load the dynamic library specified by the 'path' attribute of that dynamic object in the scenefile, which is expected to contain a single plugin for which plugin_type should return the expected object type required by the reference location in the scenefile. plugin_new will then be called to instantiate an object which is assumed to adhere to the interface specified by plugin_type() (returning a 'new'ed object subclassing the corresponding Milton superclass).  As of writing this (Spring 2009), plugin_delete will never actually be called, but plugin authors are encouraged to conform to this simple interface and include a sensible cleanup handler for plugin_delete anyway, assuming the pointer passed in was previously allocated via a call to plugin_new.", 
+   "_usage" : "usage/dynamic.js", 
+}, 
+

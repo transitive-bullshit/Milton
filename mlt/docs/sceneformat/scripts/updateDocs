@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rm -rf ../generated/html
+
+doxygen ./doxygenConfig && cd ../generated/html && cp -r ../../images . && cd - && ./convertDoxygen && echo && echo "Scenefile docs generated successfully"
+#&& firefox ../generated/html/index.php
+#mutt -s "Milton Scenefile Docs" -a scenefile.tar.gz fisch0920@gmail.com < /dev/null && 
+

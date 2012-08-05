@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Milton", "Milton.vcproj", "{E8008D3B-487C-4F8E-837C-E691FB55FCBA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exec", "..\exec\exec.vcproj", "{C0A674E5-AA70-478C-85C4-0731E56CEAC2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8008D3B-487C-4F8E-837C-E691FB55FCBA} = {E8008D3B-487C-4F8E-837C-E691FB55FCBA}
+		{7FE50482-7643-43CF-B6C0-56E58A529D59} = {7FE50482-7643-43CF-B6C0-56E58A529D59}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gui", "..\gui\gui.vcproj", "{7FE50482-7643-43CF-B6C0-56E58A529D59}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8008D3B-487C-4F8E-837C-E691FB55FCBA} = {E8008D3B-487C-4F8E-837C-E691FB55FCBA}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8008D3B-487C-4F8E-837C-E691FB55FCBA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E8008D3B-487C-4F8E-837C-E691FB55FCBA}.Debug|Win32.Build.0 = Debug|Win32
+		{E8008D3B-487C-4F8E-837C-E691FB55FCBA}.Release|Win32.ActiveCfg = Release|Win32
+		{E8008D3B-487C-4F8E-837C-E691FB55FCBA}.Release|Win32.Build.0 = Release|Win32
+		{C0A674E5-AA70-478C-85C4-0731E56CEAC2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C0A674E5-AA70-478C-85C4-0731E56CEAC2}.Debug|Win32.Build.0 = Debug|Win32
+		{C0A674E5-AA70-478C-85C4-0731E56CEAC2}.Release|Win32.ActiveCfg = Release|Win32
+		{C0A674E5-AA70-478C-85C4-0731E56CEAC2}.Release|Win32.Build.0 = Release|Win32
+		{7FE50482-7643-43CF-B6C0-56E58A529D59}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7FE50482-7643-43CF-B6C0-56E58A529D59}.Debug|Win32.Build.0 = Debug|Win32
+		{7FE50482-7643-43CF-B6C0-56E58A529D59}.Release|Win32.ActiveCfg = Release|Win32
+		{7FE50482-7643-43CF-B6C0-56E58A529D59}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

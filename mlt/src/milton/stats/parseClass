@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Usage: $0 [flags] [header file]+"
+echo "   Generates source files from header files given an appropriate include path"
+
+# Generates a 
+~tfischer/bin/parseClass.py -I. -I../../common -I../../common/math -I../cameras -I../core -I../accel -I../shapes -I../stats -I../util -I/course/cs123/qt/include/QtGui -I/course/cs123/qt/include/QtCore -I/course/cs123/qt/include/Qt $1
+

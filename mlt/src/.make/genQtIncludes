@@ -1,0 +1,1 @@
+/bin/ls /course/cs123/qt/include/Qt* | grep -v ':' | grep -v '^[a-z]' | sort -u | tr '\n' ' ' > qtIncludes

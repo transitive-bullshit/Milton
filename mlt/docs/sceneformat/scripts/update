@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./generate && cd ../generated/html && tar -cvf scenefile.tar * && gzip scenefile.tar && scp scenefile.tar.gz mlt224@milton.mjacobs.net:. && ssh mlt224@milton.mjacobs.net && cd -
+

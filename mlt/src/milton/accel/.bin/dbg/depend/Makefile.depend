@@ -1,0 +1,3 @@
+# Add rules for object files to depend on main Makefile, including 
+# any files included directly or indirectly by that Makefile
+.bin/dbg/depend/Makefile.depend .bin/dbg/objects/i686/AABB.o .bin/dbg/objects/i686/SpatialAccel.o .bin/dbg/objects/i686/kdTreeAccel.o : ../../.make/common.mk ../../.make/defines.mk ../../.make/functions.mk ../../.make/libraries.mk ../../.make/targets.mk Makefile
